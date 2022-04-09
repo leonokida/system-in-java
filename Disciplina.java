@@ -11,9 +11,10 @@ public class Disciplina implements Serializable {
     public Disciplina() {
         //constructor
     }
-    public Disciplina(String codigo, String nome, int cargaHoraria) {
+    public Disciplina(String codigo, String nome, String descr_estrutura, int cargaHoraria) {
         this.codigo = codigo;
         this.nome = nome;
+        this.descr_estrutura = descr_estrutura;
         this.cargaHoraria = cargaHoraria;
     }
 
