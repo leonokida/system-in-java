@@ -13,6 +13,10 @@ public class ListaDisponiveis {
         this.lista = new ArrayList<DisciplinaDisponivel>();
     }
 
+    public int tamanho() {
+        return this.lista.size();
+    }
+
     public void adiciona(DisciplinaDisponivel disciplina) {
         this.lista.add(disciplina);
     }

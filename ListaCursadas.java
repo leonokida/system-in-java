@@ -13,6 +13,10 @@ public class ListaCursadas {
         this.lista = new ArrayList<DisciplinaCursada>();
     }
 
+    public int tamanho() {
+        return this.lista.size();
+    }
+
     public void adiciona(DisciplinaCursada disciplina) {
         this.lista.add(disciplina);
     }
