@@ -31,7 +31,7 @@ public class Arquivo {
             //proximo atributo "carga horaria"
             inicio=fim+1;
             fim=line.indexOf(';');
-            d.setCargaHoraria(line.substring (inicio, fim));
+            d.setCargaHoraria(Integer.parseInt(line.substring (inicio, fim)));
 
             //proximo atributo "descr_estrutura"
             inicio=fim+1;
@@ -41,12 +41,12 @@ public class Arquivo {
             //proximo atributo "situacao"
             inicio=fim+1;
             fim=line.indexOf(';');
-            d.setSituacao(line.substring (inicio, fim));
+            d.setSituacao(Integer.parseInt(line.substring (inicio, fim)));
 
             //proximo atributo "semestre cursado"
             inicio=fim+1;
             fim=line.indexOf(';');
-            d.setSemestreCursado(line.substring (inicio, fim));
+            d.setSemestreCursado(Integer.parseInt(line.substring (inicio, fim)));
             
             lista.adiciona(d);
 
@@ -55,33 +55,39 @@ public class Arquivo {
     }
     
     public void Le_Disciplina_Disponivel(DisciplinaDisponivel d){
-        try{
-            //generalizar nome do arquivo
-            FileInputStream arq = new FileInputStream("exemplo_trabalho_TAP_Disciplinas_2019.csv");
-            ObjectInputStream in = new ObjectInputStream(arq);
-            d = (DisciplinaDisponivel) in.readObject();
+        //generalizar nome do arquivo
+        File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+        Scanner sc = new Scanner(arquivo);
+        String line; //string que vai pegar a linha 
+        int inicio; // posicao incial do atributo
+        int fim; //posicao final do atributo
 
-            //Fazer com que leia mais de uma disciplina
-            //while(!a.getNome().equals(nome)){
-                System.out.println(d.getCodigo());
-                System.out.println(d.getNome());
-                System.out.println(d.getCargaHoraria());
-                System.out.println(d.getDescr_estrutura());
-                System.out.println(d.getPeriodo());
-            //}
-            in.close();
-        }catch(java.io.IOException exc2){
-            System.out.println("Erro ao Ler o arquivo");
-        }catch(ClassNotFoundException cnfex){
-            System.out.println("Não achou a Classe");
+        while (sc.hasNext()) {
+            //leio a linha
+            line = sc.nextLine();
+            
+            //atributo "codigo"
+            fim=line.indexOf(';');
+            d.setCodigo(line.substring (0, fim));
+            
+            //proximo atributo "nome"
+            inicio=fim+1;
+            fim=line.indexOf(';');
+            d.setNome(line.substring (inicio, fim));
+
+            //proximo atributo "periodo"
+            inicio=fim+1;
+            fim=line.indexOf(';');
+            d.setPeriodo(Integer.parseInt(line.substring (inicio, fim)));
+
+            //proximo atributo "carga horaria"
+            inicio=fim+1;
+            fim=line.indexOf(';');
+            d.setCargaHoraria(Integer.parseInt(line.substring (inicio, fim)));
+            
         }
-        //---------------------------------------TESTE
-        /*System.out.println(d.getCodigo());
-        System.out.println(d.getNome());
-        System.out.println(d.getCargaHoraria());
-        System.out.println(d.getDescr_estrutura());
-        System.out.println(d.getPeriodo());*/
-        //---------------------------------------TESTE
+        sc.close();
+        
     }
     
     //IMPLEMENTAR GRAVACAO DOS DADOS PARA UM ARQUIVO CSV
