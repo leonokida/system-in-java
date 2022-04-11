@@ -56,7 +56,7 @@ public class Arquivo {
     
     public void Le_Disciplina_Disponivel(DisciplinaDisponivel d){
         //generalizar nome do arquivo
-        File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+        File arquivo = new File("exemplo_trabalho_TAP_Disciplinas_2019.csv");
         Scanner sc = new Scanner(arquivo);
         String line; //string que vai pegar a linha 
         int inicio; // posicao incial do atributo
@@ -84,7 +84,7 @@ public class Arquivo {
             inicio=fim+1;
             fim=line.indexOf(';');
             d.setCargaHoraria(Integer.parseInt(line.substring (inicio, fim)));
-            
+
         }
         sc.close();
         
