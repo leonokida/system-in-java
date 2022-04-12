@@ -2,18 +2,22 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Scanner;
 
-import sistema.dinf.Disciplina;
 import sistema.dinf.DisciplinaCursada;
+import sistema.dinf.DisciplinaDisponivel;
+import sistema.dinf.Disciplina;
+import sistema.dinf.ListaCursadas;
+import sistema.dinf.ListaDisponiveis;
 
 public class Arquivo {
 
-    public void Le_Disciplina_Cursada(ListaCursadas lista, DisciplinaCursada d){
+    public void leDisciplinaCursada (ListaCursadas lista) throws IOException {
         //generalizar nome do arquivo
         File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
         Scanner sc = new Scanner(arquivo);
-        String line; //string que vai pegar a linha 
+		DisciplinaCursada d = new DisciplinaCursada();
+		String line;
         int inicio; // posicao incial do atributo
-        int fim; //posicao final do atributo
+        int fim; 	//posicao final do atributo
 
         while (sc.hasNext()) {
             //leio a linha
@@ -54,7 +58,7 @@ public class Arquivo {
         sc.close();
     }
     
-    public void Le_Disciplina_Disponivel(DisciplinaDisponivel d){
+    public void Le_Disciplina_Disponivel(DisciplinaDisponivel d) throws IOException{
         //generalizar nome do arquivo
         File arquivo = new File("exemplo_trabalho_TAP_Disciplinas_2019.csv");
         Scanner sc = new Scanner(arquivo);
