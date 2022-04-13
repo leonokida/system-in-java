@@ -10,11 +10,11 @@ public class DisciplinaCursada extends Disciplina {
     public DisciplinaCursada() {
         //constructor
     }
-    public DisciplinaCursada(String codigo, String nome, String descr_estrutura, int cargaHoraria, int situacao, int semestreCursado) {
+    public DisciplinaCursada(String codigo, String nome, String descEstrutura, int cargaHoraria, int situacao, int semestreCursado) {
         this.setCodigo(codigo);
         this.setNome(nome);
         this.setCargaHoraria(cargaHoraria);
-		this.setDescr_estrutura(descr_estrutura);
+		this.setDescEstrutura(descEstrutura);
         this.situacao = situacao;
         this.semestreCursado = semestreCursado;
     }

@@ -43,7 +43,7 @@ public class ListaCursadas {
 		for (int i = 0 ; i < this.lista.size() ; i++){
 			System.out.printf("%s\n", this.lista.get(i).getCodigo());
 			System.out.printf("%s\n", this.lista.get(i).getNome());
-			System.out.printf("%s\n", this.lista.get(i).getDescr_estrutura());
+			System.out.printf("%s\n", this.lista.get(i).getDescEstrutura());
 			System.out.printf("%s\n", this.lista.get(i).getCargaHoraria());
 			System.out.printf("%s\n", this.lista.get(i).getSituacao());
 			System.out.printf("%s\n", this.lista.get(i).getSemestreCursado());

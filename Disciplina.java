@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class Disciplina implements Serializable {
     private String codigo;
     private String nome;
-    private String descr_estrutura; //optativa ou obrigatoria
+    private String descEstrutura; //optativa ou obrigatoria
     private int cargaHoraria;
 
     public Disciplina() {
         //constructor
     }
-    public Disciplina(String codigo, String nome, String descr_estrutura, int cargaHoraria) {
+    public Disciplina(String codigo, String nome, String descEstrutura, int cargaHoraria) {
         this.codigo = codigo;
         this.nome = nome;
-        this.descr_estrutura = descr_estrutura;
+        this.descEstrutura = descEstrutura;
         this.cargaHoraria = cargaHoraria;
     }
 
@@ -32,12 +32,12 @@ public class Disciplina implements Serializable {
         return this.nome;
     }
     
-    public void setDescr_estrutura(String descr_estrutura) {
-        this.descr_estrutura = descr_estrutura;
+    public void setDescEstrutura(String descEstrutura) {
+        this.descEstrutura = descEstrutura;
     }
 
-    public String getDescr_estrutura() {
-        return this.descr_estrutura;
+    public String getDescEstrutura() {
+        return this.descEstrutura;
     }
 
     public void setCargaHoraria(int cargaHoraria) {
