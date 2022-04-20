@@ -9,10 +9,11 @@ public class DisciplinaDisponivel extends Disciplina implements Serializable {
     public DisciplinaDisponivel() {
         //constructors
     }
-    public DisciplinaDisponivel(String codigo, String nome, int cargaHoraria, int periodo) {
+    public DisciplinaDisponivel(String codigo, String nome, int cargaHoraria, String descEstrutura, int periodo) {
         this.setCodigo(codigo);
         this.setNome(nome);
         this.setCargaHoraria(cargaHoraria);
+        this.setDescEstrutura(descEstrutura);
         this.periodo = periodo;
     }
 

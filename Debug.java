@@ -6,10 +6,12 @@ import sistema.dinf.DisciplinaDisponivel;
 import sistema.dinf.ListaCursadas;
 import sistema.dinf.ListaDisponiveis;
 import sistema.dinf.ListaCursadasDAO;
+import sistema.dinf.ListaDisponiveisDAO;
 
 
 public class Debug {
 	public static void main(String[] args) throws IOException{
+		/*
 		ListaCursadas listCursadas = new ListaCursadas();
 		ListaCursadasDAO arqCursadas = new ListaCursadasDAO();
 
@@ -17,5 +19,13 @@ public class Debug {
 		arqCursadas.leDisciplinaCursada(listCursadas);
 
 		listCursadas.imprime();
+		*/
+		ListaDisponiveis listDisp = new ListaDisponiveis();
+		ListaDisponiveisDAO arqDisponiveis = new ListaDisponiveisDAO();
+
+		listDisp.imprime();
+		arqDisponiveis.leDisciplinaDisponivel(listDisp);
+
+		listDisp.imprime();
 	}
 }

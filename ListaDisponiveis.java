@@ -38,4 +38,16 @@ public class ListaDisponiveis {
         return this.lista.get(i);
     }
 
+    public void imprime(){
+		System.out.printf("%d\n", this.lista.size());
+		for (int i = 0 ; i < this.lista.size() ; i++){
+			System.out.printf("%s\n", this.lista.get(i).getCodigo());
+			System.out.printf("%s\n", this.lista.get(i).getNome());
+			System.out.printf("%s\n", this.lista.get(i).getDescEstrutura());
+			System.out.printf("%s\n", this.lista.get(i).getCargaHoraria());
+			System.out.printf("%s\n", this.lista.get(i).getPeriodo());
+			System.out.println();
+		}
+	}
+
 }
