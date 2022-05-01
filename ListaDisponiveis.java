@@ -8,9 +8,16 @@ import sistema.dinf.DisciplinaDisponivel;
 public class ListaDisponiveis {
 
     private ArrayList<DisciplinaDisponivel> lista;
+    private static ListaDisponiveis uniqueInstance;
 
-    public ListaDisponiveis() {
+    private ListaDisponiveis() {
         this.lista = new ArrayList<DisciplinaDisponivel>();
+    }
+    public static synchronized ListaDisponiveis getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ListaDisponiveis();
+        }
+        return uniqueInstance;
     }
 
     public int tamanho() {

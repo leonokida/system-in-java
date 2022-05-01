@@ -8,14 +8,19 @@ import sistema.dinf.DisciplinaDisponivel;
 import sistema.dinf.ListaDisponiveis;
 
 public class ListaDisponiveisDAO {
-    public ListaDisponiveisDAO() {
+    private static ListaDisponiveisDAO uniqueInstance;
+    private ListaDisponiveisDAO() {
         //constructor
     }
+    public static synchronized ListaDisponiveisDAO getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ListaDisponiveisDAO();
+        }
+        return uniqueInstance;
+    }
     
-    //arrumar
     public void leDisciplinaDisponivel(ListaDisponiveis lista) throws IOException{
-        //generalizar nome do arquivo
-        File arquivo = new File("exemplo_trabalho_TAP_Disciplinas_2011.csv");
+        File arquivo = new File("exemplo_trabalho_TAP_Disciplinas_2019.csv");
         Scanner sc = new Scanner(arquivo);
 		String line = "";
         String elementos[] = new String[15];
@@ -26,7 +31,6 @@ public class ListaDisponiveisDAO {
             DisciplinaDisponivel d = new DisciplinaDisponivel();
             //le linha
             line = sc.nextLine();
-            System.out.println(line);
             elementos = line.split(";");
 
             //atributo "codigo"
@@ -36,7 +40,12 @@ public class ListaDisponiveisDAO {
             d.setNome(elementos[5]);
 
             //proximo atributo "carga horaria"
-            d.setCargaHoraria(Integer.parseInt(elementos[7]));
+            if (elementos[6].equals("")) {
+                d.setCargaHoraria(0);
+            }
+            else {
+                d.setCargaHoraria(Integer.parseInt(elementos[7]));
+            }
 
             //proximo atributo "descEstrutura"
             d.setDescEstrutura(elementos[2]);
@@ -54,19 +63,4 @@ public class ListaDisponiveisDAO {
         }
         sc.close();
     }
-    
-    //IMPLEMENTAR GRAVACAO DOS DADOS PARA UM ARQUIVO DAT
-    /*public void grava(Vector alunos){
-        try{
-            FileOutputStream arq = new FileOutputStream("arq.dat");
-            ObjectOutputStream out = new ObjectOutputStream(arq);
-            out.writeObject();
-            out.flush();
-            out.close();
-        }
-        
-        catch(java.io.IOException exc){
-            System.out.println("Erro ao Gravar o arquivo");
-        }
-    }*/
 }

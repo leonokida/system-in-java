@@ -10,8 +10,15 @@ import sistema.dinf.Disciplina;
 import sistema.dinf.ListaCursadas;
 
 public class ListaCursadasDAO {
-    public ListaCursadasDAO() {
+    private static ListaCursadasDAO uniqueInstance;
+    private ListaCursadasDAO() {
         //constructor
+    }
+    public static synchronized ListaCursadasDAO getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ListaCursadasDAO();
+        }
+        return uniqueInstance;
     }
 
     public void leDisciplinaCursada (ListaCursadas lista) throws IOException {
@@ -52,19 +59,4 @@ public class ListaCursadasDAO {
         sc.close();
     }
     
-    
-    //IMPLEMENTAR GRAVACAO DOS DADOS PARA UM ARQUIVO DAT
-    /*public void grava(Vector alunos){
-        try{
-            FileOutputStream arq = new FileOutputStream("arq.dat");
-            ObjectOutputStream out = new ObjectOutputStream(arq);
-            out.writeObject();
-            out.flush();
-            out.close();
-        }
-        
-        catch(java.io.IOException exc){
-            System.out.println("Erro ao Gravar o arquivo");
-        }
-    }*/
 }

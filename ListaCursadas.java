@@ -8,9 +8,16 @@ import sistema.dinf.DisciplinaCursada;
 public class ListaCursadas {
 
     private ArrayList<DisciplinaCursada> lista;
+    private static ListaCursadas uniqueInstance;
 
-    public ListaCursadas() {
+    private ListaCursadas() {
         this.lista = new ArrayList<DisciplinaCursada>();
+    }
+    public static synchronized ListaCursadas getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ListaCursadas();
+        }
+        return uniqueInstance;
     }
 
     public int tamanho() {

@@ -20,8 +20,8 @@ public class Debug {
 
 		listCursadas.imprime();
 		*/
-		ListaDisponiveis listDisp = new ListaDisponiveis();
-		ListaDisponiveisDAO arqDisponiveis = new ListaDisponiveisDAO();
+		ListaDisponiveis listDisp = ListaDisponiveis.getInstance();
+		ListaDisponiveisDAO arqDisponiveis = ListaDisponiveisDAO.getInstance();
 
 		listDisp.imprime();
 		arqDisponiveis.leDisciplinaDisponivel(listDisp);
