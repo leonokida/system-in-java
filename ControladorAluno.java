@@ -67,7 +67,13 @@ public class ControladorAluno {
     }
 
     public float calculaDesempenho(){
-        
+        ArrayList<DisciplinaCursada> listaDisciplinas = this.cursadas.disciplinasPorSemestre(this.semestreAtual);
+        float aprovacoes = 0;
+        for(int i = 0; i < listaDisciplinas.size(); i++){
+            if(listaDisciplinas.elementAt(i).getSituacao() == 1)
+                aprovacoes++;
+        }
+        return aprovacoes/listaDisciplinas.size();
     }
 
 }
