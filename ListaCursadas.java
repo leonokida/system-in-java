@@ -45,6 +45,17 @@ public class ListaCursadas {
         return this.lista.get(i);
     }
 
+    public ArrayList<DisciplinaCursada> disciplinasPorSemestre(int semestre){
+	ArrayList<DisciplinaCursada> lista = new ArrayList<DisciplinaCursada>();
+	DisciplinaCursada temp;
+    	for(int i = 0; i < this.tamanho(); i++){
+		temp = this.busca(i);
+		if(temp.getSemestreCursado() == semestre)
+			lista.add(temp);
+	}
+	return temp;
+    }
+
 	public void imprime(){
 		System.out.printf("%d\n", this.lista.size());
 		for (int i = 0 ; i < this.lista.size() ; i++){
