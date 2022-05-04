@@ -17,10 +17,18 @@ public class Main{
 		janela.setVisible(true);	
 
 		ListaDisponiveis lista = ListaDisponiveis.getInstance();
-		DisciplinaDisponivel disciplina = new DisciplinaDisponivel("218129217", "ICC", "obrigatoria", 60, 0);
+		DisciplinaDisponivel disciplina;
+		disciplina = new DisciplinaDisponivel("218129217", "ICC", "obrigatoria", 60, 1);
 		lista.adiciona(disciplina);
-		disciplina = new DisciplinaDisponivel("211233213", "ITC", "obrigatoria", 60, 1);
+		disciplina = new DisciplinaDisponivel("211233213", "ITC", "obrigatoria", 60, 2);
 		lista.adiciona(disciplina);
+
+		System.out.println(lista.busca(0).getNome());
+		System.out.println(lista.busca(0).getPeriodo());
+		System.out.println(lista.busca(1).getNome());
+		System.out.println(lista.busca(1).getPeriodo());
+		System.out.println(lista.tamanho());
+		System.out.println(lista.busca((lista.tamanho()-1)).getPeriodo() - (lista.busca(0)).getPeriodo() + 1);
 
 		//UI02 janela2 = new UI02();
 		//janela2.setVisible(true);
