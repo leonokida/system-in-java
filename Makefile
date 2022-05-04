@@ -8,9 +8,11 @@ all:
 	javac ./sistema/dinf/ListaCursadasDAO.java
 	javac ./sistema/dinf/ListaDisponiveisDAO.java
 	javac ./sistema/dinf/Arquivo.java
-	javac Debug.java
+	javac Main.java
+#	javac Debug.java
 
-main: javac main
+main:
+	javac Main.java
 
 purge:
 	rm *.class
