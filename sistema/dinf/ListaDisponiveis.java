@@ -57,4 +57,8 @@ public class ListaDisponiveis {
 		}
 	}
 
+    public void remover(DisciplinaDisponivel rem) {
+        this.lista.remove(rem);
+    }
+
 }

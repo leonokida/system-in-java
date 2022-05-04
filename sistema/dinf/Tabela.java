@@ -1,5 +1,7 @@
 package sistema.dinf;
 
+import java.util.ArrayList;
+
 import sistema.dinf.Disciplina;
 import sistema.dinf.DisciplinaDisponivel;
 import sistema.dinf.DisciplinaCursada;
@@ -34,9 +36,20 @@ public class Tabela {
                 itens.add(novo);
             }
         }
+        for (i=0; i < listaDisponiveis.tamanho(); i++) {
+            Disciplina novo = new Disciplina();
+            novo.setNome(listaDisponiveis.busca(i).getNome());
+            novo.setCargaHoraria(listaDisponiveis.busca(i).getCargaHoraria());
+            novo.setCodigo(listaDisponiveis.busca(i).getCodigo());
+            novo.setDescEstrutura(listaDisponiveis.busca(i).getDescEstrutura());
+
+            if ((itens.indexOf(novo) != -1)) {
+                listaDisponiveis.remover(listaDisponiveis.busca(i));
+            }
+        }
     }
 
-    public int busca(int i) {
+    public Disciplina busca(int i) {
         return itens.get(i);
     }
 }

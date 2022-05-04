@@ -8,6 +8,7 @@ all:
 	javac ./sistema/dinf/ListaCursadasDAO.java
 	javac ./sistema/dinf/ListaDisponiveisDAO.java
 	javac ./sistema/dinf/Arquivo.java
+	javac ./sistema/dinf/Tabela.java
 	javac Main.java
 #	javac Debug.java
 
