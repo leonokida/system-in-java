@@ -5,8 +5,6 @@ import sistema.dinf.DisciplinaCursada;
 import sistema.dinf.DisciplinaDisponivel;
 import sistema.dinf.ListaCursadas;
 import sistema.dinf.ListaDisponiveis;
-import sistema.dinf.ListaCursadasDAO;
-import sistema.dinf.ListaDisponiveisDAO;
 
 
 public class ControladorAluno {
@@ -18,6 +16,7 @@ public class ControladorAluno {
     private int semestreAtual;
     private String nome;
     private int grr;
+    private int quantMatriculas;
 
     public ControladorAluno(){
 
@@ -31,6 +30,7 @@ public class ControladorAluno {
         this.grr = grr;
         this.nome = nome;
         this.desempenho = this.calculaDesempenho();
+        this.quantMatriculas = this.cursadas.disciplinasPorSemestre(this.semestreAtual).size();
     }
 
     public void setIRA(float ira){
@@ -65,15 +65,33 @@ public class ControladorAluno {
     public int getGRR(){
         return this.grr;
     }
+    
+    public int getQuantMatriculas(){
+        return this.quantMatriculas;
+    }
 
     public float calculaDesempenho(){
-        ArrayList<DisciplinaCursada> listaDisciplinas = this.cursadas.disciplinasPorSemestre(this.semestreAtual);
+        int semestreAnterior;
+        if (this.semestreAtual % 2 == 0)
+            semestreAnterior = this.semestreAtual - 1;
+        else
+            semestreAnterior = this.semestreAtual - 9;
+        ArrayList<DisciplinaCursada> listaDisciplinas = this.cursadas.disciplinasPorSemestre(semestreAnterior);
         float aprovacoes = 0;
         for(int i = 0; i < listaDisciplinas.size(); i++){
             if(listaDisciplinas.elementAt(i).getSituacao() == 1)
                 aprovacoes++;
         }
         return aprovacoes/listaDisciplinas.size();
+    }
+    
+    public int calculaDisponibilidade(){
+        this.desempenho = this.calculaDesempenho();
+        if(this.desempenho >= 2/3)
+            return 5;
+        if(this.desempenho >= 1/2)
+            return 4;
+        return 3;
     }
 
 }
