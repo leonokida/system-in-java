@@ -1,4 +1,5 @@
 all:
+	javac -d . ControladorAluno.java
 	javac -d . Disciplina.java
 	javac -d . DisciplinaCursada.java
 	javac -d . DisciplinaDisponivel.java
