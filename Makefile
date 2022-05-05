@@ -11,6 +11,8 @@ all:
 	javac ./sistema/dinf/ListaCheckbox.java
 	javac ./sistema/dinf/Arquivo.java
 	javac ./sistema/dinf/Tabela.java
+	javac ./sistema/dinf/UI01.java
+	javac ./sistema/dinf/UI02.java
 	javac Main.java
 #	javac Debug.java
 

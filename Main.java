@@ -7,9 +7,7 @@ import sistema.dinf.UI01;
 import sistema.dinf.UI02;
 
 public class Main{
-	public static void main(String args[]) throws IOException{
-		UI01 janela = new UI01();
-		janela.setVisible(true);	
+	public static void main(String args[]) throws IOException{	
 
 		// cria controlador
 		ControladorAluno aluno = new ControladorAluno();
@@ -28,8 +26,17 @@ public class Main{
 		// aluno.getTabela()
 
 		// para usar checkbox
-		// ListaCheckbox checknovo = new ListaCheckbox();
-		// checknovo = aluno.getListaCheckbox();
+		ListaCheckbox checknovo = new ListaCheckbox();
+		checknovo = aluno.getListaCheckbox();
+
+		UI01 janela1 = new UI01();
+		janela1.setVisible(true);
+
+		UI02 janela2 = UI02.getInstance();
+		janela2.adicionaText("Segure CTRL para selecionar várias matérias :)");
+		janela2.adicionaTabela(checknovo);
+		janela2.adicionaBotoes();
+
 		// marcando/desmarcando item i
 		// checknovo.busca(i).setMarcado(!checknovo.busca(i).getMarcado());
 		// atualizando

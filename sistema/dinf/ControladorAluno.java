@@ -67,6 +67,7 @@ public class ControladorAluno {
     }
     public void setListaCheckbox(ListaCheckbox listaCheckbox) {
         this.listaCheckbox = listaCheckbox;
+		
     }
 
     public void escreve() throws IOException {

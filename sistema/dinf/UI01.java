@@ -42,7 +42,7 @@ public class UI01 extends JFrame implements ActionListener {
 			//muda de tela
 			this.setVisible(false);
 
-			UI02 janela2 = new UI02();
+			UI02 janela2 = UI02.getInstance();
 			janela2.setVisible(true);
 		}
 		if (e.getSource() == botao_sair){
