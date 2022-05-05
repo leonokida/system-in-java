@@ -4,25 +4,57 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Scanner;
 
-import sistema.dinf.DisciplinaCursada;
-import sistema.dinf.DisciplinaDisponivel;
-import sistema.dinf.Disciplina;
-import sistema.dinf.ListaCursadas;
-import sistema.dinf.ListaDisponiveis;
+import sistema.dinf.ListaCheckbox;
+import sistema.dinf.ItemCheckbox;
 
 public class Arquivo {
-    //IMPLEMENTAR GRAVACAO DOS DADOS PARA UM ARQUIVO CSV
-    /*public void grava(Vector alunos){
-        try{
-            FileOutputStream arq = new FileOutputStream("arq.dat");
+
+    public Arquivo() {
+        //constructor
+    }
+
+    public void grava(ListaCheckbox lista){
+        try {
+            FileOutputStream arq = new FileOutputStream("pedido.dat");
             ObjectOutputStream out = new ObjectOutputStream(arq);
-            out.writeObject();
-            out.flush();
+            int i;
+            for (i=0; i < lista.tamanho(); i++) {
+                if (lista.busca(i) == null) {
+                    break;
+                }
+                out.writeObject(lista.busca(i));
+                out.flush();
+            }
             out.close();
         }
-        
-        catch(java.io.IOException exc){
-            System.out.println("Erro ao Gravar o arquivo");
+        catch (java.io.IOException exc) {
+            System.out.println("Erro ao salvar arquivo.");
         }
-    }*/
+    }
+
+    public void le(ListaCheckbox lista, int n) {
+        try {
+            FileInputStream arq = new FileInputStream("pedido.dat");
+            ObjectInputStream in = new ObjectInputStream(arq);
+            ItemCheckbox novo = new ItemCheckbox();
+            int i;
+            for (i=0; i < n; i++) {
+                novo = (ItemCheckbox) in.readObject();
+                lista.adiciona(novo);
+                if (lista.busca(i) == null) {
+                    break;
+                }
+            }
+            in.close();
+        }
+        catch (java.io.EOFException eof) {
+            System.out.println("Arquivo lido.");
+        }
+        catch (java.io.IOException exc2) {
+            System.out.println("Erro ao ler arquivo.");
+        }
+        catch (ClassNotFoundException cnfex) {
+            System.out.println("Classe não encontrada.");
+        }
+    }
 }

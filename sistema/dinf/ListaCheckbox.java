@@ -21,6 +21,10 @@ public class ListaCheckbox {
 		return uniqueInstance;
 	}
 
+    public int tamanho() {
+        return this.itens.size();
+    }
+
     public void criaLista(ListaDisponiveis lista) {
         int i;
         for (i = 0; i < lista.tamanho(); i++) {
@@ -29,7 +33,19 @@ public class ListaCheckbox {
         }
     }
 
+    public void adiciona(ItemCheckbox novo) {
+        this.itens.add(novo);
+    }
+
     public ItemCheckbox busca(int i) {
         return itens.get(i);
+    }
+
+    public int esvaziaLista() {
+        int tamanhoAntigo = this.itens.size();
+        while (this.itens.size() > 0) {
+            this.itens.remove(0);
+        }
+        return tamanhoAntigo;
     }
 }

@@ -61,4 +61,36 @@ public class ListaCursadasDAO {
 		sc.close();
 	}
 
+	public String leNome() throws IOException {
+		// generalizar nome do arquivo
+		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+		Scanner sc = new Scanner(arquivo);
+		String line = "";
+		String elementos[] = new String[15];
+		sc.nextLine();
+		sc.nextLine();
+
+		line = sc.nextLine();
+		elementos = line.split(";");
+
+		return elementos[1];
+
+	}
+
+	public String leGrr() throws IOException {
+		// generalizar nome do arquivo
+		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+		Scanner sc = new Scanner(arquivo);
+		String line = "";
+		String elementos[] = new String[15];
+		sc.nextLine();
+		sc.nextLine();
+
+		line = sc.nextLine();
+		elementos = line.split(";");
+
+		return elementos[0];
+
+	}
+
 }

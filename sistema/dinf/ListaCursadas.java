@@ -46,15 +46,17 @@ public class ListaCursadas {
 		return this.lista.get(i);
 	}
 
-	public ArrayList<DisciplinaCursada> disciplinasPorSemestre(int semestre) {
-		ArrayList<DisciplinaCursada> lista = new ArrayList<DisciplinaCursada>();
-		DisciplinaCursada temp;
-		for (int i = 0; i < this.tamanho(); i++) {
-			temp = this.busca(i);
-			if (temp.getSemestreCursado() == semestre)
-				lista.add(temp);
+	public void atualizaSemestres() {
+		int i= 0;
+		int j = 1;
+		while (i < this.lista.size()) {
+			int sem = this.lista.get(i).getSemestreCursado();
+			while ((i < this.lista.size()) && (this.lista.get(i).getSemestreCursado() == sem)) {
+				this.lista.get(i).setSemestreCursado(j);
+				i++;
+			}
+			j++;
 		}
-		return lista;
 	}
 
 	public void imprime() {

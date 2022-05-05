@@ -3,103 +3,74 @@ package sistema.dinf;
 import java.io.*;
 import java.util.*;
 
-import sistema.dinf.Disciplina;
-import sistema.dinf.DisciplinaCursada;
-import sistema.dinf.DisciplinaDisponivel;
 import sistema.dinf.ListaCursadas;
 import sistema.dinf.ListaDisponiveis;
+import sistema.dinf.ListaCheckbox;
+import sistema.dinf.ListaDisponiveisDAO;
+import sistema.dinf.ListaCursadasDAO;
+import sistema.dinf.Arquivo;
 
 
 public class ControladorAluno {
 
-    private ListaCursadas cursadas;
-    private ListaDisponiveis disponiveis;
-    private float ira;
-    private float desempenho;
-    private int semestreAtual;
+    private ListaCursadas listaCursadas;
+    private ListaDisponiveis listaDisponiveis;
+    private ListaCheckbox listaCheckbox;
+    private Tabela tabela;
     private String nome;
-    private int grr;
-    private int quantMatriculas;
+    private String grr;
+    private float ira;
 
     public ControladorAluno(){
-
+        listaCursadas = ListaCursadas.getInstance();
+        listaDisponiveis = ListaDisponiveis.getInstance();
+        listaCheckbox = ListaCheckbox.getInstance();
+        tabela = Tabela.getInstance();
     }
 
-    public ControladorAluno(float ira, int semestreAtual, String nome, int grr){
-        this.cursadas = ListaCursadas.getInstance();
-        this.disponiveis = ListaDisponiveis.getInstance();
-        this.ira = ira;
-        this.semestreAtual = semestreAtual;
-        this.grr = grr;
-        this.nome = nome;
-        this.desempenho = this.calculaDesempenho();
-        this.quantMatriculas = this.cursadas.disciplinasPorSemestre(this.semestreAtual).size();
+    public void geraListas() throws IOException {
+        // Gera lista de disciplinas cursadas
+        ListaCursadasDAO leCursadas = ListaCursadasDAO.getInstance();
+        String nomeLido = "", grrLido = "";
+        leCursadas.leDisciplinaCursada(listaCursadas);
+        this.nome = leCursadas.leNome();
+        this.grr = leCursadas.leGrr();
+        listaCursadas.ordena();
+		listaCursadas.atualizaSemestres();
+
+        // Gera lista de disciplinas disponíveis
+        ListaDisponiveisDAO leDisponiveis = ListaDisponiveisDAO.getInstance();
+        leDisponiveis.leDisciplinaDisponivel(listaDisponiveis);
+
+        // Gera tabela
+        tabela.criaTabela(listaCursadas, listaDisponiveis);
+
+        // Gera lista para checkbox
+        listaCheckbox.criaLista(listaDisponiveis);
     }
 
-    public void setIRA(float ira){
-        this.ira = ira;
-    }
-
-    public float getIRA(){
-        return this.ira;
-    }
-
-    public void setSemestreAtual(int semestreAtual){
-        this.semestreAtual = semestreAtual;
-        this.desempenho = this.calculaDesempenho();
-    }
-
-    public int getSemestreAtual(){
-        return this.semestreAtual;
-    }
-
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-
-    public String getNome(){
+    public String getNome() {
         return this.nome;
     }
 
-    public void setGRR(int grr){
-        this.grr = grr;
-    }
-
-    public int getGRR(){
+    public String getGrr() {
         return this.grr;
     }
-    
-    public int getQuantMatriculas(){
-        return this.quantMatriculas;
-    }
 
-    public float calculaDesempenho(){
-        int semestreAnterior;
-        if (this.semestreAtual % 2 == 0)
-            semestreAnterior = this.semestreAtual - 1;
-        else
-            semestreAnterior = this.semestreAtual - 9;
-        ArrayList<DisciplinaCursada> listaDisciplinas = this.cursadas.disciplinasPorSemestre(semestreAnterior);
-        float aprovacoes = 0;
+    public void escreve() throws IOException {
+        FileWriter fileWriter = new FileWriter("pedido.txt");
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        printWriter.printf("Pedido de %s de matrícula %s:\n", this.nome, this.grr);
+        int i;
+        for (i = 0; i < listaCheckbox.tamanho(); i++) {
+            if (listaCheckbox.busca(i).getMarcado()) {
+                printWriter.printf("%s %s\n", listaCheckbox.busca(i).getDisciplina().getNome(), listaCheckbox.busca(i).getDisciplina().getCodigo());
+            }
+        }
+        printWriter.close();
 
-		for(DisciplinaCursada disciplina : listaDisciplinas){
-			if(disciplina.getSituacao() == 1) aprovacoes++;
-		}
-
-        // for(int i = 0; i < listaDisciplinas.size(); i++){
-            // if(listaDisciplinas.elementAt(i).getSituacao() == 1)
-                // aprovacoes++;
-        // }
-        return aprovacoes/listaDisciplinas.size();
-    }
-    
-    public int calculaDisponibilidade(){
-        this.desempenho = this.calculaDesempenho();
-        if(this.desempenho >= 2/3)
-            return 5;
-        if(this.desempenho >= 1/2)
-            return 4;
-        return 3;
+        Arquivo arq = new Arquivo();
+        arq.grava(listaCheckbox);
     }
 
 }
