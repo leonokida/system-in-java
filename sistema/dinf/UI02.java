@@ -14,6 +14,8 @@ public class UI02 extends JFrame implements ActionListener {
 	private JButton botao_sair;
 	private JButton botao_importar;
 
+	private JTable tabela_disponiveis;
+
 	//o get size vai ser as colunas
 	//as linhas vai ser 6 se n tiver optativas
 
@@ -81,6 +83,8 @@ public class UI02 extends JFrame implements ActionListener {
 
 		JTable table = new JTable(dataModel);
 
+		this.tabela_disponiveis = table;
+
 		JScrollPane scrollpane = new JScrollPane(table);
 		scrollpane.setSize(new Dimension(700,300));
 		scrollpane.setMinimumSize(new Dimension(700,300));
@@ -103,18 +107,39 @@ public class UI02 extends JFrame implements ActionListener {
 		return;
 	}
 
-	public void getChecados (){
+	public int getChecados (int[] vetor){
+		int i_vetor = 0;
+		for (int i = 0 ; i < lista_materias.tamanho() ; i++){
+			if (lista_materias.busca(i).getMarcado() == true){
+				vetor[i_vetor] = i;
+				i_vetor++;
+			}
+		}
 
+		return i_vetor;
+	}
+
+	public void setChecados (int[] vetor, int tam){
+		for (int i = 0 ; i < tam ; i++){
+			this.tabela_disponiveis.setRowSelectionInterval(vetor[i], vetor[i]);
+		}
 	}
 
 	public void actionPerformed(ActionEvent e){
 		if (e.getSource() == this.botao_sair){
 			this.setVisible(false);
 
+			int vetor[] = new int[lista_materias.tamanho()];
+			vetor = tabela_disponiveis.getSelectedRows();
+
+
+
 			//aqui usa a função getSelectedRows pra retornar um vetor de indices das linhas selecionadas, e usa isso pra ver se da pra pedir a materia
 
 			//UI03 janela3 = UI03.getInstance();
 			//janela3.setVisible(true);
+
+			System.exit(0);		//tirar isso dps
 		}
 		if (e.getSource() == this.botao_importar){
 			int tam = lista_materias.esvaziaLista();
@@ -122,8 +147,9 @@ public class UI02 extends JFrame implements ActionListener {
 			arq.le(this.lista_materias, tam);
 
 			int vetor[] = new int[tam];
+			int tam_checados = getChecados (vetor);
 
-			
+			setChecados(vetor, tam_checados);
 		}
 	}
 }
