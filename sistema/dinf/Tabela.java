@@ -10,10 +10,18 @@ import sistema.dinf.ListaDisponiveis;
 
 public class Tabela {
     private ArrayList<Disciplina> itens;
+    private static Tabela uniqueInstance;
 
-    public Tabela() {
+    private Tabela() {
         itens = new ArrayList<Disciplina>();
     }
+
+    public static synchronized Tabela getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new Tabela();
+		}
+		return uniqueInstance;
+	}
 
     public void criaTabela(ListaCursadas listaCursadas, ListaDisponiveis listaDisponiveis) {
         int i;
