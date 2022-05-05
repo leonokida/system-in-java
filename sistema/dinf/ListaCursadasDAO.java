@@ -56,6 +56,9 @@ public class ListaCursadasDAO {
 			// proximo atributo "semestre cursado"
 			d.setSemestreCursado(Integer.parseInt(elementos[5]) * 10 + Integer.parseInt(elementos[8].substring(0, 1)));
 
+			// proximo atributo "nota"
+			d.setNota(Integer.parseInt(elementos[6]));
+
 			lista.adiciona(d);
 		}
 		sc.close();

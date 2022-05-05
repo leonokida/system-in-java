@@ -15,11 +15,12 @@ public class ControladorAluno {
 
     private ListaCursadas listaCursadas;
     private ListaDisponiveis listaDisponiveis;
-    private ListaCheckbox listaCheckbox;
-    private Tabela tabela;
+    public ListaCheckbox listaCheckbox;
+    public Tabela tabela;
     private String nome;
     private String grr;
     private float ira;
+    private float aprovacao;
 
     public ControladorAluno(){
         listaCursadas = ListaCursadas.getInstance();
@@ -57,6 +58,17 @@ public class ControladorAluno {
         return this.grr;
     }
 
+    public Tabela getTabela() {
+        return this.tabela;
+    }
+
+    public ListaCheckbox getListaCheckbox() {
+        return this.listaCheckbox;
+    }
+    public void setListaCheckbox(ListaCheckbox listaCheckbox) {
+        this.listaCheckbox = listaCheckbox;
+    }
+
     public void escreve() throws IOException {
         FileWriter fileWriter = new FileWriter("pedido.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);
@@ -71,6 +83,56 @@ public class ControladorAluno {
 
         Arquivo arq = new Arquivo();
         arq.grava(listaCheckbox);
+    }
+
+    public float calculaIra() {
+        float somaNotaCarga = 0;
+        float somaCarga = 0;
+
+        for (int i = 0; i < listaCursadas.tamanho(); i++) {
+            somaNotaCarga = somaNotaCarga + (listaCursadas.busca(i).getNota() * listaCursadas.busca(i).getCargaHoraria());
+            somaCarga = somaCarga + listaCursadas.busca(i).getCargaHoraria();
+        }
+
+        this.ira = somaNotaCarga / (somaCarga*100);
+        return this.ira;
+    }
+
+    public float dadosAprovacao() {
+        int sem = listaCursadas.busca(listaCursadas.tamanho()-1).getSemestreCursado();
+        float soma = 0;
+        int i = listaCursadas.tamanho()-1;
+        int cont = 0;
+        while ((i >= 0) && (listaCursadas.busca(i).getSemestreCursado() == sem)) {
+            if (listaCursadas.busca(i).getSituacao() == 1) {
+                soma++;
+            }
+            cont++;
+            i--;
+        }
+        this.aprovacao = soma / cont;
+        return this.aprovacao;
+    }
+
+    public int qtdReprovacoesFalta() {
+        int soma = 0;
+        int i = listaCursadas.tamanho()-1;
+        while (i >= 0) {
+            if (listaCursadas.busca(i).getSituacao() == 3) {
+                soma++;
+            }
+            i--;
+        }
+        return soma;
+    }
+
+    public int numMatriculasRecomendado() {
+        if (this.aprovacao > 2/3)
+            return 5;
+        else if (this.aprovacao >= 1/2)
+            return 4;
+        else
+            return 3;
     }
 
 }

@@ -2,33 +2,42 @@ import java.io.*;
 
 import sistema.dinf.*;
 
-//import sistema.dinf.Disciplina;
-//import sistema.dinf.DisciplinaCursada;
-//import sistema.dinf.DisciplinaDisponivel;
-//import sistema.dinf.ListaCursadas;
-//import sistema.dinf.ListaDisponiveis;
-//import sistema.dinf.ListaCursadasDAO;
-//import sistema.dinf.ListaDisponiveisDAO;
-//import sistema.dinf.UI01;
+import sistema.dinf.ControladorAluno;
+import sistema.dinf.UI01;
+import sistema.dinf.UI02;
 
 public class Main{
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		UI01 janela = new UI01();
 		janela.setVisible(true);	
 
-		ListaDisponiveis lista = ListaDisponiveis.getInstance();
-		DisciplinaDisponivel disciplina;
-		disciplina = new DisciplinaDisponivel("218129217", "ICC", "obrigatoria", 60, 1);
-		lista.adiciona(disciplina);
-		disciplina = new DisciplinaDisponivel("211233213", "ITC", "obrigatoria", 60, 2);
-		lista.adiciona(disciplina);
+		// cria controlador
+		ControladorAluno aluno = new ControladorAluno();
+		aluno.geraListas();
 
-		System.out.println(lista.busca(0).getNome());
-		System.out.println(lista.busca(0).getPeriodo());
-		System.out.println(lista.busca(1).getNome());
-		System.out.println(lista.busca(1).getPeriodo());
-		System.out.println(lista.tamanho());
-		System.out.println(lista.busca((lista.tamanho()-1)).getPeriodo() - (lista.busca(0)).getPeriodo() + 1);
+		// calcula dados de aprovação do último semestre
+		float aprovacao = aluno.dadosAprovacao();
+
+		// calcula reprovações por falta
+		int reprovacaoFalta = aluno.qtdReprovacoesFalta();
+
+		// calcula número de matrículas recomendado
+		int numMatriculas = aluno.numMatriculasRecomendado();
+
+		// para usar tabela
+		// aluno.getTabela()
+
+		// para usar checkbox
+		// aluno.getListaCheckbox()
+		// aluno.setListaCheckbox(lista checkbox nova) para atualizar
+
+		// escreve no txt e no arquivo .dat objeto
+		// aluno.escreve();
+
+		// para importar
+		// int tam = aluno.getListaCheckbox().esvaziaLista();
+		// Arquivo arq = new Arquivo();
+		// arq.le(aluno.getListaCheckbox(), tam);
 
 		//UI02 janela2 = new UI02();
 		//janela2.setVisible(true);

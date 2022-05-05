@@ -26,12 +26,14 @@ public class Tabela {
     public void criaTabela(ListaCursadas listaCursadas, ListaDisponiveis listaDisponiveis) {
         int i;
         for (i=0; i < listaCursadas.tamanho(); i++) {
-            Disciplina novo = new Disciplina();
-            novo.setNome(listaCursadas.busca(i).getNome());
-            novo.setCargaHoraria(listaCursadas.busca(i).getCargaHoraria());
-            novo.setCodigo(listaCursadas.busca(i).getCodigo());
-            novo.setDescEstrutura(listaCursadas.busca(i).getDescEstrutura());
-            itens.add(novo);
+            if (listaCursadas.busca(i).getSituacao() == 1) {
+                Disciplina novo = new Disciplina();
+                novo.setNome(listaCursadas.busca(i).getNome());
+                novo.setCargaHoraria(listaCursadas.busca(i).getCargaHoraria());
+                novo.setCodigo(listaCursadas.busca(i).getCodigo());
+                novo.setDescEstrutura(listaCursadas.busca(i).getDescEstrutura());
+                itens.add(novo);
+            }
         }
         for (i=0; i < listaDisponiveis.tamanho(); i++) {
             Disciplina novo = new Disciplina();
