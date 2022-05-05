@@ -8,18 +8,10 @@ import sistema.dinf.ListaDisponiveis;
 
 public class ListaCheckbox {
     private ArrayList<ItemCheckbox> itens;
-    private static ListaCheckbox uniqueInstance;
 
-    private ListaCheckbox() {
+    public ListaCheckbox() {
         itens = new ArrayList<ItemCheckbox>();
     }
-
-    public static synchronized ListaCheckbox getInstance() {
-		if (uniqueInstance == null) {
-			uniqueInstance = new ListaCheckbox();
-		}
-		return uniqueInstance;
-	}
 
     public int tamanho() {
         return this.itens.size();

@@ -28,8 +28,12 @@ public class Main{
 		// aluno.getTabela()
 
 		// para usar checkbox
-		// aluno.getListaCheckbox()
-		// aluno.setListaCheckbox(lista checkbox nova) para atualizar
+		// ListaCheckbox checknovo = new ListaCheckbox();
+		// checknovo = aluno.getListaCheckbox();
+		// marcando/desmarcando item i
+		// checknovo.busca(i).setMarcado(!checknovo.busca(i).getMarcado());
+		// atualizando
+		// aluno.setListaCheckbox(checknovo);
 
 		// escreve no txt e no arquivo .dat objeto
 		// aluno.escreve();

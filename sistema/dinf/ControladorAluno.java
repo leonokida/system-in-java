@@ -25,7 +25,7 @@ public class ControladorAluno {
     public ControladorAluno(){
         listaCursadas = ListaCursadas.getInstance();
         listaDisponiveis = ListaDisponiveis.getInstance();
-        listaCheckbox = ListaCheckbox.getInstance();
+        listaCheckbox = new ListaCheckbox();
         tabela = Tabela.getInstance();
     }
 
