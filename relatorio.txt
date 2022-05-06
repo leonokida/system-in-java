@@ -1,0 +1,29 @@
+Autores: Leon Augusto Okida Gonçalves, João Lucas Cordeiro, Henrique Margotte e Vinícius Oliveira dos Santos
+
+Sobre o trabalho:
+O trabalho foi feito seguindo o padrão MVC e com o uso de DAOs. Abaixo, uma descrição das classes de cada tipo:
+
+-> DAO:
+sistema/dinf/Arquivo.java: Grava uma lista do tipo ListaCheckbox em um arquivo .dat. Também cria uma nova ListaCheckbox a partir da leitura de um arquivo .dat.
+sistema/dinf/ListaCursadasDAO.java: Preenche a lista de DisciplinaCursada com base na leitura do .csv do aluno. Além disso, permite a leitura do Nome e GRR do aluno.
+sistema/dinf/ListaDisponiveisDAO.java: Preenche a lista de DisciplinaDisponivel com base na leitura do .csv das disciplinas disponíveis.
+
+-> Modelo:
+sistema/dinf/Disciplina.java: Contém os atributos código, nome, descrição de estrutura (optativa ou obrigatória) e carga horária.
+sistema/dinf/DisciplinaCursada.java: Extende Disciplina e adiciona os atributos situação, semestre cursado e nota.
+sistema/dinf/DisciplinaDisponivel.java: Extende Disciplina e adiciona o atributo período.
+sistema/dinf/ItemCheckbox.java: Item da lista de checkbox. Contém uma DisciplinaDisponivel e um boolean que controla se está marcado ou não.
+sistema/dinf/ListaDisponiveis.java: Lista de DisciplinaDisponivel, com métodos de inserir, buscar, ordenar, remover.
+sistema/dinf/ListaCursadas.java: Lista de DisciplinaCursada, com métodos de inserir, buscar e ordenar. É feito também um tratamento para calcular os períodos, após terem sido lidos do arquivo.
+sistema/dinf/Tabela.java: Representa a tabela de disciplinas cursadas e das matérias que faltam para a barreira. Construída a partir de ListaDisponiveis e ListaCursadas.
+sistema/dinf/ListaCheckbox.java: Representa a lista de disciplinas a serem escolhidas. Construída a partir de ListaDisponiveis.
+
+-> Controlador:
+sistema/dinf/ControladorAluno.java: Contém as listas e tabela, além de conter os atributos nome e GRR. Controla os modelos e constrói a lista de checkbox e a tabela.
+Main.java: Programa principal, une a visão com o controlador.
+
+-> Visão:
+sistema/dinf/UI01.java:
+sistema/dinf/UI02.java:
+
+As classes ListaCursadas, ListaDisponiveis, ControladorAluno e Tabela seguem o padrão Singleton.

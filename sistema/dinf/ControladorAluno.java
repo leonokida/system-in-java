@@ -44,9 +44,13 @@ public class ControladorAluno {
         // Gera lista de disciplinas cursadas
         ListaCursadasDAO leCursadas = ListaCursadasDAO.getInstance();
         String nomeLido = "", grrLido = "";
-        leCursadas.leDisciplinaCursada(listaCursadas, file);
-        this.nome = leCursadas.leNome();
-        this.grr = leCursadas.leGrr();
+        File copiaUm, copiaDois, copiaTres;
+        copiaUm = file;
+        leCursadas.leDisciplinaCursada(listaCursadas, copiaUm);
+        copiaDois = file;
+        this.nome = leCursadas.leNome(copiaDois);
+        copiaTres = file;
+        this.grr = leCursadas.leGrr(copiaTres);
         listaCursadas.ordena();
 		listaCursadas.atualizaSemestres();
 

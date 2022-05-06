@@ -20,4 +20,5 @@ main:
 	javac Main.java
 
 purge:
+	rm sistema/dinf/*.class
 	rm *.class

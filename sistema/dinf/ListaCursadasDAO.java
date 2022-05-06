@@ -68,11 +68,10 @@ public class ListaCursadasDAO {
 		sc.close();
 	}
 
-	public String leNome() throws IOException {
+	public String leNome(File arq) throws IOException {
 		// generalizar nome do arquivo
-		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
 		Locale loc = new Locale("es", "ES");
-		Scanner sc = new Scanner(arquivo,"UTF-8");
+		Scanner sc = new Scanner(arq,"UTF-8");
 		sc.useLocale(loc);
 		String line = "";
 		String elementos[] = new String[15];
@@ -88,10 +87,9 @@ public class ListaCursadasDAO {
 
 	}
 
-	public String leGrr() throws IOException {
+	public String leGrr(File arq) throws IOException {
 		// generalizar nome do arquivo
-		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
-		Scanner sc = new Scanner(arquivo);
+		Scanner sc = new Scanner(arq);
 		String line = "";
 		String elementos[] = new String[15];
 		sc.nextLine();
