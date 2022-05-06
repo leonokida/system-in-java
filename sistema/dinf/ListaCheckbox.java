@@ -17,24 +17,18 @@ public class ListaCheckbox {
         return this.itens.size();
     }
 
-    public void criaLista(ListaDisponiveis lista) {
+    public void criaLista(ListaDisponiveis lista, int sem) {
         int i;
         for (i = 0; i < lista.tamanho(); i++) {
-        	ItemCheckbox novo = new ItemCheckbox(false, lista.busca(i));
-            itens.add(novo);
+            if ((lista.busca(i).getPeriodo() >= sem) || lista.busca(i).getPeriodo() == 0) {
+                ItemCheckbox novo = new ItemCheckbox(false, lista.busca(i));
+                itens.add(novo);
+            }
         }
-    }
-    
-    public ArrayList<ItemCheckbox> getLista(){
-        return this.itens;
     }
 
     public void adiciona(ItemCheckbox novo) {
     	this.itens.add(novo);
-    }
-    
-    public void adicionaLista(ListaCheckbox lista) {
-    	this.itens.addAll(lista.getLista());
     }
     
     public void remove(int i) {
