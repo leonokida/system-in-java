@@ -1,4 +1,8 @@
-Autores: Leon Augusto Okida Gonçalves, João Lucas Cordeiro, Henrique Margotte e Vinícius Oliveira dos Santos
+Autores: 
+Leon Augusto Okida Gonçalves	GRR20190365
+João Lucas Cordeiro				GRR20190427
+Henrique Margotte				GRR20191978
+Vinícius Oliveira dos Santos	GRR20182592
 
 Sobre o trabalho:
 O trabalho foi feito seguindo o padrão MVC e com o uso de DAOs. Abaixo, uma descrição das classes de cada tipo:
@@ -23,7 +27,8 @@ sistema/dinf/ControladorAluno.java: Contém as listas e tabela, além de conter 
 Main.java: Programa principal, une a visão com o controlador.
 
 -> Visão:
-sistema/dinf/UI01.java:
-sistema/dinf/UI02.java:
+sistema/dinf/UI01.java: Contém a primeira janela, o menu principal, com seus botões e outros elementos invisíveis pro usuário.
+sistema/dinf/UI02.java: Temos a segunda janela, com as tabelas com as disciplinas, os botões para importação e salvamento e saída.
+sistema/dinf/UI03.java: Possui a terceira janela, tela simples com um botão para sair com uma mensagem informando o sucesso na operação.
 
-As classes ListaCursadas, ListaDisponiveis, ControladorAluno e Tabela seguem o padrão Singleton.
+As classes ListaCursadas, ListaDisponiveis, ControladorAluno, Tabela, UI02 e UI03 seguem o padrão Singleton.
