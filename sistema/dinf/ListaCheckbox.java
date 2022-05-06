@@ -24,9 +24,17 @@ public class ListaCheckbox {
             itens.add(novo);
         }
     }
+    
+    public ArrayList<ItemCheckbox> getLista(){
+        return this.itens;
+    }
 
     public void adiciona(ItemCheckbox novo) {
     	this.itens.add(novo);
+    }
+    
+    public void adicionaLista(ListaCheckbox lista) {
+    	this.itens.addAll(lista.getLista());
     }
     
     public void remove(int i) {
