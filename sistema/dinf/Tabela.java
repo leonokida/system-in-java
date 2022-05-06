@@ -32,6 +32,7 @@ public class Tabela {
                 novo.setCargaHoraria(listaCursadas.busca(i).getCargaHoraria());
                 novo.setCodigo(listaCursadas.busca(i).getCodigo());
                 novo.setDescEstrutura(listaCursadas.busca(i).getDescEstrutura());
+                novo.setPeriodo(listaCursadas.busca(i).getPeriodo());
                 itens.add(novo);
             }
         }
@@ -52,6 +53,7 @@ public class Tabela {
             novo.setCargaHoraria(listaDisponiveis.busca(i).getCargaHoraria());
             novo.setCodigo(listaDisponiveis.busca(i).getCodigo());
             novo.setDescEstrutura(listaDisponiveis.busca(i).getDescEstrutura());
+            novo.setPeriodo(listaDisponiveis.busca(i).getPeriodo());
 
             if ((itens.indexOf(novo) != -1)) {
                 listaDisponiveis.remover(listaDisponiveis.busca(i));
@@ -59,6 +61,10 @@ public class Tabela {
         }
     }
 
+    public int tamanho() {
+    	return itens.size();
+    }
+    
     public Disciplina busca(int i) {
         return itens.get(i);
     }

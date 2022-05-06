@@ -13,6 +13,8 @@ import sistema.dinf.Arquivo;
 
 public class ControladorAluno {
 
+	private static ControladorAluno uniqueInstance;
+	
     private ListaCursadas listaCursadas;
     private ListaDisponiveis listaDisponiveis;
     public ListaCheckbox listaCheckbox;
@@ -22,11 +24,20 @@ public class ControladorAluno {
     private float ira;
     private float aprovacao;
 
-    public ControladorAluno(){
+    private ControladorAluno(){
         listaCursadas = ListaCursadas.getInstance();
         listaDisponiveis = ListaDisponiveis.getInstance();
         listaCheckbox = new ListaCheckbox();
         tabela = Tabela.getInstance();
+        
+        this.uniqueInstance = null;
+    }
+    
+    public static synchronized ControladorAluno getInstance() {
+    	if (uniqueInstance == null) {
+			uniqueInstance = new ControladorAluno();
+		}
+		return uniqueInstance;
     }
 
     public void geraListas() throws IOException {
@@ -39,7 +50,7 @@ public class ControladorAluno {
         listaCursadas.ordena();
 		listaCursadas.atualizaSemestres();
 
-        // Gera lista de disciplinas disponíveis
+        // Gera lista de disciplinas disponÃ­veis
         ListaDisponiveisDAO leDisponiveis = ListaDisponiveisDAO.getInstance();
         leDisponiveis.leDisciplinaDisponivel(listaDisponiveis);
 
@@ -61,6 +72,10 @@ public class ControladorAluno {
     public Tabela getTabela() {
         return this.tabela;
     }
+    
+    public ListaCursadas getListaCursadas() {
+    	return this.listaCursadas;
+    }
 
     public ListaCheckbox getListaCheckbox() {
         return this.listaCheckbox;
@@ -73,7 +88,8 @@ public class ControladorAluno {
     public void escreve() throws IOException {
         FileWriter fileWriter = new FileWriter("pedido.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("Pedido de %s de matrícula %s:\n", this.nome, this.grr);
+        
+        printWriter.printf("Pedido de %s de matrÃ­cula %s:\n", this.nome, this.grr);
         int i;
         for (i = 0; i < listaCheckbox.tamanho(); i++) {
             if (listaCheckbox.busca(i).getMarcado()) {

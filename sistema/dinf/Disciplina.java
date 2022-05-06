@@ -7,15 +7,17 @@ public class Disciplina implements Serializable {
     private String nome;
     private String descEstrutura; //optativa ou obrigatoria
     private int cargaHoraria;
+    private int periodo;
 
     public Disciplina() {
         //constructor
     }
-    public Disciplina(String codigo, String nome, String descEstrutura, int cargaHoraria) {
+    public Disciplina(String codigo, String nome, String descEstrutura, int cargaHoraria, int periodo) {
         this.codigo = codigo;
         this.nome = nome;
         this.descEstrutura = descEstrutura;
         this.cargaHoraria = cargaHoraria;
+        this.periodo = periodo;
     }
 
     public void setCodigo(String codigo) {
@@ -45,5 +47,12 @@ public class Disciplina implements Serializable {
     }
     public int getCargaHoraria() {
         return this.cargaHoraria;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
+    public int getPeriodo() {
+        return this.periodo;
     }
 }

@@ -29,9 +29,9 @@ public class ListaCursadas {
 		this.lista.add(disciplina);
 	}
 
-	/*
-	 * Compara por semestre e por nome
-	 */
+	
+	//Compara por semestre e por nome
+	
 	public void ordena() {
 		this.lista.sort((o1, o2) -> {
 			int cmp = Integer.valueOf(o1.getSemestreCursado()).compareTo(o2.getSemestreCursado());
@@ -52,7 +52,7 @@ public class ListaCursadas {
 		while (i < this.lista.size()) {
 			int sem = this.lista.get(i).getSemestreCursado();
 			while ((i < this.lista.size()) && (this.lista.get(i).getSemestreCursado() == sem)) {
-				this.lista.get(i).setSemestreCursado(j);
+				this.lista.get(i).setPeriodo(j);
 				i++;
 			}
 			j++;
@@ -72,3 +72,4 @@ public class ListaCursadas {
 		}
 	}
 }
+

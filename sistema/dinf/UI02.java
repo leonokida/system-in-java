@@ -2,6 +2,8 @@ package sistema.dinf;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -15,14 +17,15 @@ public class UI02 extends JFrame implements ActionListener {
 	private JButton botao_importar;
 
 	private JTable tabela_disponiveis;
+	private JTable tabela_cursadas;
 
 	//o get size vai ser as colunas
 	//as linhas vai ser 6 se n tiver optativas
 
 	public UI02 (){
 		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
-		this.setLocation(200,200);
-		this.setSize(800,600);
+		this.setLocation(200,10);
+		this.setSize(800,700);
 	}
 
 	public void adicionaRigid (Dimension dimensao){
@@ -50,7 +53,7 @@ public class UI02 extends JFrame implements ActionListener {
 
 		this.getContentPane().add(botao_importar);
 
-		this.adicionaRigid (new Dimension(500,20));
+		this.adicionaRigid (new Dimension(500,10));
 
 		this.getContentPane().add(botao_sair);
 	}
@@ -61,34 +64,107 @@ public class UI02 extends JFrame implements ActionListener {
 		this.getContentPane().add(texto);
 	}
 
-	public void adicionaTabela(ListaCheckbox lista){
+	public void adicionaTabelaCursadas (Tabela lista) {
+		TableModel dataModel = new AbstractTableModel() {
+			public int getColumnCount() { 
+				return (2);
+			}
+			//a tabela sÃ³ tem uma coluna
+
+			public int getRowCount() {
+				Tabela tabela = Tabela.getInstance();
+				return tabela.tamanho();
+			}
+			//o tanto de linhas Ã© o tanto de matÃ©rias q tem na lista
+			
+			public String getColumnName (int column) {
+				if (column == 0) {
+					return ("Nome");
+				}
+				else
+					return ("Período");
+			}
+			
+
+			public Object getValueAt(int row, int col) { 
+				if (col == 0) {
+					Tabela tabela = Tabela.getInstance();
+					return (tabela.busca(row).getNome());
+				}
+				else {
+					Tabela tabela = Tabela.getInstance();
+					
+					if (tabela.busca(row).getPeriodo() > 0) {
+						Object objeto = (Integer) tabela.busca(row).getPeriodo();
+						return (objeto);
+					}
+					else
+						return ("Sem Período");
+				}
+			}
+			//retorna o nome de cada matÃ©ria
+		};
+
+		JTable table = new JTable(dataModel);
+		table.removeRowSelectionInterval(0,0);
+		
+		this.tabela_disponiveis = table;
+
+		JScrollPane scrollpane = new JScrollPane(table);
+		scrollpane.setSize(new Dimension(700,150));
+		scrollpane.setMinimumSize(new Dimension(700,150));
+		scrollpane.setMaximumSize(new Dimension(700,150));
+		scrollpane.setAlignmentX(CENTER_ALIGNMENT);
+
+		this.getContentPane().add(scrollpane);
+	}
+	
+	public void adicionaTabelaDisponiveis(ListaCheckbox lista){
 		this.setListaCheckboxDisponiveis(lista);
 
 		TableModel dataModel = new AbstractTableModel() {
 			public int getColumnCount() { 
-				return (1);
+				return (2);
 			}
-			//a tabela só tem uma coluna
+			//a tabela sÃ³ tem uma coluna
 
 			public int getRowCount() {
 				return lista_materias.tamanho();
 			}
-			//o tanto de linhas é o tanto de matérias q tem na lista
+			//o tanto de linhas Ã© o tanto de matÃ©rias q tem na lista
 
-			public Object getValueAt(int row, int col) { 
-				return (lista_materias.busca(row).getDisciplina().getNome());
+			public String getColumnName (int column) {
+				if (column == 0) {
+					return ("Nome");
+				}
+				else
+					return ("Período");
 			}
-			//retorna o nome de cada matéria
+			
+			public Object getValueAt(int row, int col) { 
+				if (col == 0)
+					return (lista_materias.busca(row).getDisciplina().getNome());
+				else {
+					if (lista_materias.busca(row).getDisciplina().getPeriodo() > 0) {
+						Object objeto = (Integer) lista_materias.busca(row).getDisciplina().getPeriodo();
+						return (objeto);
+					}
+					else
+						return ("Sem Período");
+				}
+			}
+			//retorna o nome de cada matÃ©ria
 		};
 
 		JTable table = new JTable(dataModel);
-
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		
 		this.tabela_disponiveis = table;
 
 		JScrollPane scrollpane = new JScrollPane(table);
-		scrollpane.setSize(new Dimension(700,300));
-		scrollpane.setMinimumSize(new Dimension(700,300));
-		scrollpane.setMaximumSize(new Dimension(700,300));
+		scrollpane.setSize(new Dimension(700,200));
+		scrollpane.setMinimumSize(new Dimension(700,200));
+		scrollpane.setMaximumSize(new Dimension(700,200));
 		scrollpane.setAlignmentX(CENTER_ALIGNMENT);
 
 		this.getContentPane().add(scrollpane);
@@ -121,25 +197,40 @@ public class UI02 extends JFrame implements ActionListener {
 
 	public void setChecados (int[] vetor, int tam){
 		for (int i = 0 ; i < tam ; i++){
-			this.tabela_disponiveis.setRowSelectionInterval(vetor[i], vetor[i]);
+			this.tabela_disponiveis.addRowSelectionInterval(vetor[i], vetor[i]);
 		}
+	}
+	
+	public void desselecionaLista (int[] vetor, int tam) {
+		for (int i = 0 ; i < this.lista_materias.tamanho() ; i++)
+			this.lista_materias.busca(i).setMarcado(false);
+		
+		for (int i = 0 ; i < tam ; i++)
+			this.lista_materias.busca(vetor[i]).setMarcado(true);
 	}
 
 	public void actionPerformed(ActionEvent e){
 		if (e.getSource() == this.botao_sair){
 			this.setVisible(false);
 
-			int vetor[] = new int[lista_materias.tamanho()];
+			int vetor[] = new int[tabela_disponiveis.getSelectedRowCount()];
 			vetor = tabela_disponiveis.getSelectedRows();
 
+			desselecionaLista (vetor, tabela_disponiveis.getSelectedRowCount());
+			
+			ControladorAluno control = ControladorAluno.getInstance();
+			
+			try {
+				control.escreve();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
+			//aqui usa a funÃ§Ã£o getSelectedRows pra retornar um vetor de indices das linhas selecionadas, e usa isso pra ver se da pra pedir a materia
 
-			//aqui usa a função getSelectedRows pra retornar um vetor de indices das linhas selecionadas, e usa isso pra ver se da pra pedir a materia
-
-			//UI03 janela3 = UI03.getInstance();
-			//janela3.setVisible(true);
-
-			System.exit(0);		//tirar isso dps
+			UI03 janela3 = UI03.getInstance();
+			janela3.setVisible(true);
 		}
 		if (e.getSource() == this.botao_importar){
 			int tam = lista_materias.esvaziaLista();

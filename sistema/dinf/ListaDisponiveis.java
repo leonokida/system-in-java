@@ -29,7 +29,7 @@ public class ListaDisponiveis {
     }
 
     /*
-    Compara por período recomendado e por nome
+    Compara por perÃ­odo recomendado e por nome
     */
     public void ordena() {
         this.lista.sort((o1, o2) -> {

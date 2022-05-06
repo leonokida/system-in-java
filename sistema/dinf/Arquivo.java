@@ -54,7 +54,7 @@ public class Arquivo {
             System.out.println("Erro ao ler arquivo.");
         }
         catch (ClassNotFoundException cnfex) {
-            System.out.println("Classe não encontrada.");
+            System.out.println("Classe nÃ£o encontrada.");
         }
     }
 }

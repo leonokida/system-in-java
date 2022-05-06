@@ -52,7 +52,7 @@ public class ListaDisponiveisDAO {
 
             //proximo atributo "periodo"
             if (elementos[6].equals("")) {
-                // Pode ser feito em qualquer período.
+                // Pode ser feito em qualquer perÃ­odo.
                 d.setPeriodo(0);
             }
             else {
@@ -89,7 +89,7 @@ public class ListaDisponiveisDAO {
     
     public void leDisciplinaDisponivel(ListaDisponiveis lista) throws IOException{
         File arquivo = new File("exemplo_trabalho_TAP_Disciplinas_2019.csv");
-        Locale loc = new Locale("pt", "BR");
+        Locale loc = new Locale("es", "ES");
 		Scanner sc = new Scanner(arquivo,"UTF-8");
 		sc.useLocale(loc);
 		String line = "";
@@ -122,7 +122,7 @@ public class ListaDisponiveisDAO {
 
             //proximo atributo "periodo"
             if (elementos[6].equals("")) {
-                // Pode ser feito em qualquer período.
+                // Pode ser feito em qualquer perÃ­odo.
                 d.setPeriodo(0);
             }
             else {

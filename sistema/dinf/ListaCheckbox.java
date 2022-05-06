@@ -26,7 +26,11 @@ public class ListaCheckbox {
     }
 
     public void adiciona(ItemCheckbox novo) {
-        this.itens.add(novo);
+    	this.itens.add(novo);
+    }
+    
+    public void remove(int i) {
+    	this.itens.remove(i);
     }
 
     public ItemCheckbox busca(int i) {

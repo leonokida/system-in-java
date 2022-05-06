@@ -8,6 +8,12 @@ public class UI01 extends JFrame implements ActionListener {
 	private JButton botao_entrar, botao_sair;
 
 	public UI01 (){
+		this.getContentPane().add(Box.createRigidArea(new Dimension(800,100)));
+		JLabel texto = new JLabel("SIGA TAP");
+		texto.setFont(new Font("Dialog",Font.BOLD, 60));
+		texto.setAlignmentX(CENTER_ALIGNMENT);
+		this.getContentPane().add(texto);
+		
 		botao_entrar	= new JButton("Entrar");
 		botao_sair		= new JButton("Sair");
 
@@ -28,12 +34,12 @@ public class UI01 extends JFrame implements ActionListener {
 
 		this.getContentPane().setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
 
-		this.getContentPane().add(Box.createRigidArea(new Dimension(800,140)));
+		this.getContentPane().add(Box.createRigidArea(new Dimension(800,40)));
 		this.getContentPane().add(botao_entrar);
 		this.getContentPane().add(Box.createRigidArea(new Dimension(800,50)));
 		this.getContentPane().add(botao_sair);
 
-		this.setLocation(200,200);
+		this.setLocation(200,10);
 		this.setSize(800,600);
 	}
 
