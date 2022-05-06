@@ -1,75 +1,110 @@
 package sistema.dinf;
 
-import java.lang.Integer;
-import java.util.Collections;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.Vector;
+import java.util.Locale;
+import java.util.Scanner;
+
 import sistema.dinf.DisciplinaCursada;
+import sistema.dinf.DisciplinaDisponivel;
+import sistema.dinf.Disciplina;
+import sistema.dinf.ListaCursadas;
 
-public class ListaCursadas {
+public class ListaCursadasDAO {
+	private static ListaCursadasDAO uniqueInstance;
 
-	private ArrayList<DisciplinaCursada> lista;
-	private static ListaCursadas uniqueInstance;
-
-	private ListaCursadas() {
-		this.lista = new ArrayList<DisciplinaCursada>();
+	private ListaCursadasDAO() {
+		// constructor
 	}
 
-	public static synchronized ListaCursadas getInstance() {
+	public static synchronized ListaCursadasDAO getInstance() {
 		if (uniqueInstance == null) {
-			uniqueInstance = new ListaCursadas();
+			uniqueInstance = new ListaCursadasDAO();
 		}
 		return uniqueInstance;
 	}
 
-	public int tamanho() {
-		return this.lista.size();
-	}
+	public void leDisciplinaCursada(ListaCursadas lista, File arquivo) throws IOException {
+		// generalizar nome do arquivo
+        
+		//File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+		Locale loc = new Locale("es", "ES");
+		Scanner sc = new Scanner(arquivo,"UTF-8");
+		sc.useLocale(loc);
+		String line = "";
+		String elementos[] = new String[15];
+		sc.nextLine();
+		sc.nextLine();
 
-	public void adiciona(DisciplinaCursada disciplina) {
-		this.lista.add(disciplina);
-	}
+		while (sc.hasNextLine()) {
+			DisciplinaCursada d = new DisciplinaCursada();
+			// le linha
+			line = sc.nextLine();
+			elementos = line.split(";");
 
-	
-	//Compara por semestre e por nome
-	
-	public void ordena() {
-		this.lista.sort((o1, o2) -> {
-			int cmp = Integer.valueOf(o1.getSemestreCursado()).compareTo(o2.getSemestreCursado());
-			if (cmp != 0) {
-				return cmp;
-			}
-			return o1.getNome().compareTo(o2.getNome());
-		});
-	}
+			// atributo "codigo"
+			d.setCodigo(elementos[10]);
 
-	public DisciplinaCursada busca(int i) {
-		return this.lista.get(i);
-	}
+			// proximo atributo "nome"
+			d.setNome(elementos[11]);
 
-	public void atualizaSemestres() {
-		int i= 0;
-		int j = 1;
-		while (i < this.lista.size()) {
-			int sem = this.lista.get(i).getSemestreCursado();
-			while ((i < this.lista.size()) && (this.lista.get(i).getSemestreCursado() == sem)) {
-				this.lista.get(i).setPeriodo(j);
-				i++;
-			}
-			j++;
+			// proximo atributo "carga horaria"
+			d.setCargaHoraria(Integer.parseInt(elementos[12]));
+
+			// proximo atributo "descEstrutura"
+			d.setDescEstrutura(elementos[13]);
+
+			// proximo atributo "situacao"
+			d.setSituacao(Integer.parseInt(elementos[7]));
+
+			// proximo atributo "semestre cursado"
+			d.setSemestreCursado(Integer.parseInt(elementos[5]) * 10 + Integer.parseInt(elementos[8].substring(0, 1)));
+
+			// proximo atributo "nota"
+			d.setNota(Integer.parseInt(elementos[6]));
+
+			lista.adiciona(d);
 		}
+		sc.close();
 	}
 
-	public void imprime() {
-		System.out.printf("%d\n", this.lista.size());
-		for (int i = 0; i < this.lista.size(); i++) {
-			System.out.printf("%s\n", this.lista.get(i).getCodigo());
-			System.out.printf("%s\n", this.lista.get(i).getNome());
-			System.out.printf("%s\n", this.lista.get(i).getDescEstrutura());
-			System.out.printf("%s\n", this.lista.get(i).getCargaHoraria());
-			System.out.printf("%s\n", this.lista.get(i).getSituacao());
-			System.out.printf("%s\n", this.lista.get(i).getSemestreCursado());
-			System.out.println();
-		}
+	public String leNome() throws IOException {
+		// generalizar nome do arquivo
+		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+		Locale loc = new Locale("es", "ES");
+		Scanner sc = new Scanner(arquivo,"UTF-8");
+		sc.useLocale(loc);
+		String line = "";
+		String elementos[] = new String[15];
+		sc.nextLine();
+		sc.nextLine();
+
+		line = sc.nextLine();
+		elementos = line.split(";");
+		
+		sc.close();
+
+		return elementos[1];
+
 	}
+
+	public String leGrr() throws IOException {
+		// generalizar nome do arquivo
+		File arquivo = new File("exemplo_trabalho_TAP_historico.csv");
+		Scanner sc = new Scanner(arquivo);
+		String line = "";
+		String elementos[] = new String[15];
+		sc.nextLine();
+		sc.nextLine();
+
+		line = sc.nextLine();
+		elementos = line.split(";");
+		
+		sc.close();
+
+		return elementos[0];
+
+	}
+
 }
 

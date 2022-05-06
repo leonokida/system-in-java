@@ -23,7 +23,7 @@ public class ItemCheckbox implements Serializable {
     }
 
     public void setDisciplina(DisciplinaDisponivel disciplina) {
-        this.disciplina = disciplina;
+    	this.disciplina = disciplina;
     }
     public DisciplinaDisponivel getDisciplina() {
         return this.disciplina;

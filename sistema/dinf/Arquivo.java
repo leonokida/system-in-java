@@ -20,7 +20,7 @@ public class Arquivo {
             int i;
             for (i=0; i < lista.tamanho(); i++) {
                 if (lista.busca(i) == null) {
-                    break;
+                	break;
                 }
                 out.writeObject(lista.busca(i));
                 out.flush();
@@ -32,7 +32,7 @@ public class Arquivo {
         }
     }
 
-    public void le(ListaCheckbox lista, int n) {
+    public void le(ListaCheckbox lista, int n, File file) {
         try {
             FileInputStream arq = new FileInputStream("pedido.dat");
             ObjectInputStream in = new ObjectInputStream(arq);
@@ -54,7 +54,7 @@ public class Arquivo {
             System.out.println("Erro ao ler arquivo.");
         }
         catch (ClassNotFoundException cnfex) {
-            System.out.println("Classe nÃ£o encontrada.");
+            System.out.println("Classe nao encontrada.");
         }
     }
 }

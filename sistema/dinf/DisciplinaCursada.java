@@ -15,7 +15,7 @@ public class DisciplinaCursada extends Disciplina {
         this.setCodigo(codigo);
         this.setNome(nome);
         this.setCargaHoraria(cargaHoraria);
-		this.setDescEstrutura(descEstrutura);
+        this.setDescEstrutura(descEstrutura);
         this.situacao = situacao;
         this.semestreCursado = semestreCursado;
         this.nota = nota;

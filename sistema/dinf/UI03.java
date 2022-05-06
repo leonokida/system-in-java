@@ -19,11 +19,13 @@ public class UI03 extends JFrame implements ActionListener {
 		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
 		
 		this.getContentPane().add(Box.createRigidArea(new Dimension(700,250)));
+		//usa o layout box
 		
 		JLabel texto = new JLabel("Seu pedido foi gerado com sucesso :)");
 		texto.setAlignmentX(CENTER_ALIGNMENT);
 		this.getContentPane().add(texto);
 		this.getContentPane().add(Box.createRigidArea(new Dimension(700,20)));
+		//adiciona o texto e um espacinho
 		
 		JButton botao_sair	= new JButton("Sair");
 		botao_sair.addActionListener(this);
@@ -31,6 +33,7 @@ public class UI03 extends JFrame implements ActionListener {
 		botao_sair.setMinimumSize(new Dimension(500,50));
 		botao_sair.setMaximumSize(new Dimension(500,50));
 		botao_sair.setAlignmentX(CENTER_ALIGNMENT);
+		//adiciona o botao
 		
 		this.getContentPane().add(botao_sair);
 		this.botao_sair = botao_sair;
@@ -49,6 +52,7 @@ public class UI03 extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if (e.getSource() == this.botao_sair){
 			System.exit(0);
+			//fecha o programa
 		}
 	}
 }

@@ -20,7 +20,7 @@ public class ListaCheckbox {
     public void criaLista(ListaDisponiveis lista) {
         int i;
         for (i = 0; i < lista.tamanho(); i++) {
-            ItemCheckbox novo = new ItemCheckbox(false, lista.busca(i));
+        	ItemCheckbox novo = new ItemCheckbox(false, lista.busca(i));
             itens.add(novo);
         }
     }

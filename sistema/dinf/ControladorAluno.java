@@ -35,16 +35,16 @@ public class ControladorAluno {
     
     public static synchronized ControladorAluno getInstance() {
     	if (uniqueInstance == null) {
-			uniqueInstance = new ControladorAluno();
+    		uniqueInstance = new ControladorAluno();
 		}
 		return uniqueInstance;
     }
 
-    public void geraListas() throws IOException {
+    public void geraListas(File file) throws IOException {
         // Gera lista de disciplinas cursadas
         ListaCursadasDAO leCursadas = ListaCursadasDAO.getInstance();
         String nomeLido = "", grrLido = "";
-        leCursadas.leDisciplinaCursada(listaCursadas);
+        leCursadas.leDisciplinaCursada(listaCursadas, file);
         this.nome = leCursadas.leNome();
         this.grr = leCursadas.leGrr();
         listaCursadas.ordena();

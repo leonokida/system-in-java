@@ -25,7 +25,7 @@ public class ListaDisponiveis {
     }
 
     public void adiciona(DisciplinaDisponivel disciplina) {
-        this.lista.add(disciplina);
+    	this.lista.add(disciplina);
     }
 
     /*
