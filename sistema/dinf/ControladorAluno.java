@@ -23,12 +23,14 @@ public class ControladorAluno {
     private String grr;
     private float ira;
     private float aprovacao;
+    private int semestreAnterior;
 
     private ControladorAluno(){
-        listaCursadas = ListaCursadas.getInstance();
-        listaDisponiveis = ListaDisponiveis.getInstance();
-        listaCheckbox = new ListaCheckbox();
-        tabela = Tabela.getInstance();
+        this.listaCursadas = ListaCursadas.getInstance();
+        this.listaDisponiveis = ListaDisponiveis.getInstance();
+        this.listaCheckbox = new ListaCheckbox();
+        this.tabela = Tabela.getInstance();
+	this.setSemestreAnterior();
         
         this.uniqueInstance = null;
     }
@@ -64,6 +66,7 @@ public class ControladorAluno {
         // Gera lista para checkbox
         listaCheckbox.criaLista(listaDisponiveis);
     }
+	
 
     public String getNome() {
         return this.nome;
@@ -118,13 +121,20 @@ public class ControladorAluno {
         this.ira = somaNotaCarga / (somaCarga*100);
         return this.ira;
     }
+	
+    public void setSemestreAnterior(){
+    	int sem = this.listaCursadas.tamanho();
+	int i = 1;
+	while(this.listaCursadas.busca(sem-i).getSituacao() == 3)
+		i++;
+	this.semestreAnterior = this.listaCursadas.busca(sem-i).getSemestreCursado();
+    }
 
     public float dadosAprovacao() {
-        int sem = listaCursadas.busca(listaCursadas.tamanho()-1).getSemestreCursado();
         float soma = 0;
         int i = listaCursadas.tamanho()-1;
         int cont = 0;
-        while ((i >= 0) && (listaCursadas.busca(i).getSemestreCursado() == sem)) {
+        while ((i >= 0) && (listaCursadas.busca(i).getSemestreCursado() == this.semestreAnterior)) {
             if (listaCursadas.busca(i).getSituacao() == 1) {
                 soma++;
             }
