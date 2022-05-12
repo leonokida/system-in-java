@@ -1,8 +1,3 @@
-INPUT = Main.class Main.java sistema.dinf
-
-jar-file: all
-	jar cmf SigaTap.mf SigaTap.jar $(INPUT)
-
 all:
 	javac -d . Disciplina.java
 	javac -d . DisciplinaCursada.java
@@ -20,7 +15,6 @@ all:
 	javac -d . UI02.java
 	javac -d . UI01.java
 	javac Main.java
-#	javac Debug.java
 
 main:
 	javac Main.java
